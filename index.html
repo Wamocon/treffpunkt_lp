@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TreffPunkt - Gruppenevents planen ohne WhatsApp-Chaos</title>
+  <meta name="description" content="TreffPunkt ist die webbasierte Mini-Event-Management-App für private Gruppenorganisation im DACH-Raum. Terminabstimmung, Aufgaben, Budget – alles an einem Ort.">
+  <meta name="keywords" content="gruppenevents planen, terminabstimmung gruppe, aufgabenverteilung event, budget aufteilen gruppe, event management app kostenlos">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="TreffPunkt">
+  <meta name="theme-color" content="#40916C">
+  <link rel="icon" href="app-icon-light.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://treffpunkt.vercel.app/">
+
+  <meta property="og:title" content="TreffPunkt – Zusammen planen. Zusammen erleben.">
+  <meta property="og:description" content="Kein WhatsApp-Chaos mehr: Terminabstimmung, Aufgabenverteilung, Budgetplanung und Ort-Voting – alles an einem Ort. Kostenlos und DSGVO-konform.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="TreffPunkt">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TreffPunkt – Gruppenevents planen ohne WhatsApp-Chaos">
+  <meta name="twitter:description" content="Kein Account nötig für Teilnehmer. Terminabstimmung, Aufgaben, Budget und Ort-Voting – strukturiert und stressfrei.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TreffPunkt",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "description": "Mini-Event-Management-App für private Gruppenorganisation. Terminabstimmung, Aufgabenverteilung, Budgetplanung und Ort-Voting – alles an einem Ort.",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Kostenlos nutzbar"},
+    "author": {"@type": "Organization", "name": "WAMOCON GmbH"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Brauchen Teilnehmer einen Account?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Teilnehmer können per Link teilnehmen, ohne ein Konto zu erstellen."}},
+      {"@type": "Question", "name": "Wie lade ich Leute ein?", "acceptedAnswer": {"@type": "Answer", "text": "Per direktem Link, WhatsApp-Share oder E-Mail – ganz ohne App-Download."}},
+      {"@type": "Question", "name": "Kann ich Kosten aufteilen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. TreffPunkt berechnet automatisch den Anteil pro Person und zeigt, wer wem wie viel schuldet."}},
+      {"@type": "Question", "name": "Ist TreffPunkt kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Die Kernfunktionen sind kostenlos und DSGVO-konform nutzbar."}}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --color-bg: #f5f5f7;
+      --color-bg-alt: #eeeef0;
+      --color-surface: #ffffff;
+      --color-border: rgba(0,0,0,.08);
+      --color-border-hover: rgba(0,0,0,.14);
+      --color-border-accent: rgba(64,145,108,.18);
+      --color-accent: #40916C;
+      --color-accent-dim: #2D6A4F;
+      --color-accent-soft: rgba(64,145,108,.06);
+      --color-text-main: #111113;
+      --color-muted: #555558;
+      --color-faint: #8e8e93;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text-main); }
+  </style>
+</head>
+
+<body class="overflow-x-hidden antialiased leading-relaxed">
+  <div class="gradient-orbs" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="orb orb--3"></div>
+  </div>
+
+  <div class="fixed top-0 left-0 right-0 z-[60] overflow-hidden" style="height:48px;background:#0a0a0c;border-bottom:1px solid rgba(64,145,108,.25);">
+    <div style="display:flex;align-items:center;height:100%;white-space:nowrap;animation:ticker-scroll 18s linear infinite;">
+      <span class="ticker-item">TREFFPUNKT &mdash; Zusammen planen. Zusammen erleben.</span>
+      <span class="ticker-item">TREFFPUNKT &mdash; Zusammen planen. Zusammen erleben.</span>
+      <span class="ticker-item">TREFFPUNKT &mdash; Zusammen planen. Zusammen erleben.</span>
+      <span class="ticker-item">TREFFPUNKT &mdash; Zusammen planen. Zusammen erleben.</span>
+    </div>
+  </div>
+
+  <nav class="fixed top-[48px] left-0 right-0 z-50 h-16 flex items-center transition-all duration-400" id="nav">
+    <div class="w-full max-w-[1100px] mx-auto px-5 md:px-10 flex items-center justify-between">
+      <a href="#" class="hover:opacity-70 transition-opacity flex items-center gap-2" style="text-decoration:none;">
+        <img src="app-icon-light.svg" alt="TreffPunkt Icon" style="width:28px;height:28px;">
+        <span style="font-size:1.5rem;font-weight:900;letter-spacing:-0.5px;color:#40916C;">TreffPunkt</span>
+      </a>
+      <div class="hidden md:flex items-center gap-4">
+        <div class="nav-links-pill">
+          <a href="#problem" class="nav-link" data-nav-section="problem">Problem</a>
+          <a href="#warum" class="nav-link" data-nav-section="warum">Lösung</a>
+          <a href="#funktionen" class="nav-link" data-nav-section="funktionen">Funktionen</a>
+          <a href="#process" class="nav-link" data-nav-section="process">Prozess</a>
+          <a href="#ablauf" class="nav-link" data-nav-section="ablauf">So geht's</a>
+          <a href="#faq" class="nav-link" data-nav-section="faq">FAQ</a>
+        </div>
+        <a href="https://treffpunkt.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;background:#40916C;color:#fff;font-size:.8rem;font-weight:700;border-radius:999px;text-decoration:none;">Zur App</a>
+        <div class="flex items-center gap-2 text-sm font-semibold" style="color:var(--color-muted);background:rgba(255,255,255,0.05);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);">
+          <a href="index.html" style="color:#40916C;text-decoration:none;">DE</a>
+          <span style="opacity:0.3">|</span>
+          <a href="index.en.html" class="hover:text-white transition-colors" style="text-decoration:none;">EN</a>
+        </div>
+      </div>
+      <button class="nav-hamburger md:hidden" id="navHamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" aria-hidden="true">
+    <button style="position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;" onclick="closeMobileMenu()">&times;</button>
+    <div class="mm-brand">TreffPunkt</div>
+    <div class="mm-grid">
+      <a href="#problem" class="mm-link" onclick="closeMobileMenu()">Problem</a>
+      <a href="#warum" class="mm-link" onclick="closeMobileMenu()">Lösung</a>
+      <a href="#funktionen" class="mm-link" onclick="closeMobileMenu()">Funktionen</a>
+      <a href="#process" class="mm-link" onclick="closeMobileMenu()">Prozess</a>
+      <a href="#ablauf" class="mm-link" onclick="closeMobileMenu()">So geht's</a>
+      <a href="#faq" class="mm-link" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#final-cta" class="mm-link" onclick="closeMobileMenu()">Starten</a>
+    </div>
+    <div style="margin-top:2rem;display:flex;justify-content:center;gap:1.5rem;font-size:1.2rem;font-weight:700;">
+      <a href="index.html" style="color:#40916C;text-decoration:none;">DE</a>
+      <span style="color:var(--color-border);">|</span>
+      <a href="index.en.html" style="color:var(--color-muted);text-decoration:none;">EN</a>
+    </div>
+  </div>
+
+  <section class="relative flex items-center justify-center overflow-hidden pt-[160px] pb-[130px]" id="hero">
+    <canvas id="heroParticles" class="absolute inset-0 z-[1]"></canvas>
+    <div class="absolute inset-0 z-0" style="background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(64,145,108,.09)0%,transparent 65%),radial-gradient(ellipse 50% 60% at 20% 80%,rgba(64,145,108,.05)0%,transparent 50%),radial-gradient(ellipse 45% 50% at 80% 25%,rgba(95,127,116,.07)0%,transparent 50%);"></div>
+    <div class="absolute inset-0 z-0 opacity-[.06]" style="background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,black 0%,transparent 70%);"></div>
+
+    <div class="relative z-10 text-center max-w-[960px] px-5">
+      <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full mb-7" style="background:rgba(64,145,108,.12);border:1px solid rgba(64,145,108,.35);">
+        <img src="app-icon-light.svg" alt="TreffPunkt" style="width:16px;height:16px;">
+        <span style="font-size:.8rem;font-weight:700;color:#52A280;letter-spacing:.06em;text-transform:uppercase;">Kein WhatsApp-Chaos. Kein App-Download. Kostenlos.</span>
+      </div>
+
+      <h1 class="reveal text-3xl md:text-7xl lg:text-8xl font-bold leading-[1.08] tracking-tight mb-6">
+        Gruppenevents,<br><span class="gradient-text">die wirklich funktionieren.</span>
+      </h1>
+      <p class="reveal text-lg md:text-xl max-w-[680px] mx-auto leading-relaxed" style="color:var(--color-muted);">
+        TreffPunkt hilft euch, Treffen strukturiert zu planen, Aufgaben zu verteilen und Kosten fair aufzuteilen – ohne WhatsApp-Chaos.
+      </p>
+
+      <div class="reveal mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://treffpunkt.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;background:#40916C;color:#fff;font-size:.95rem;font-weight:700;border-radius:12px;text-decoration:none;transition:all .25s ease;box-shadow:0 4px 24px rgba(64,145,108,.3);">Jetzt kostenlos starten</a>
+      </div>
+
+      <p class="reveal mt-5 text-sm" style="color:#8e8e93;">Kein Account nötig für Teilnehmer. Einladen per Link, WhatsApp oder E-Mail.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-[120px] z-20" style="background:linear-gradient(to bottom, transparent, #0f1117);"></div>
+  </section>
+
+  <section class="relative section-dark" id="problem" style="padding:6.5rem 0 5rem;margin-top:-2px;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <h2 class="reveal text-4xl md:text-6xl font-black leading-[1.05] tracking-tight mb-6" style="color:#f0f0f2;">
+        Gruppenorganisation per WhatsApp?<br><span style="color:#40916C;">Das war gestern.</span>
+      </h2>
+      <p class="reveal text-lg max-w-[620px] leading-relaxed mb-16" style="color:#9a9aaa;">Diese drei Zahlen zeigen, warum strukturierte Event-Planung längst überfällig ist: Wie viele private Gruppenevents es gibt, wie viele davon über WhatsApp organisiert werden und wie viele dabei scheitern.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(64,145,108,.07);border:1px solid rgba(64,145,108,.25);">
+          <span class="block stat-value font-black leading-none mb-3 tabular-nums" style="color:#40916C;" data-target="50" data-suffix=" Mio+">0</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">Mio. private Gruppenevents/Jahr in DACH</span>
+          <span class="block text-xs" style="color:#7a7a88;">zeigt das enorme Marktpotenzial</span>
+        </div>
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(64,145,108,.07);border:1px solid rgba(64,145,108,.25);">
+          <span class="block stat-value font-black leading-none mb-3 tabular-nums" style="color:#40916C;" data-target="85" data-suffix="%">0</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">organisieren via WhatsApp</span>
+          <span class="block text-xs" style="color:#7a7a88;">strukturelle Grenzen werden zum Problem</span>
+        </div>
+        <div class="reveal text-center p-8 rounded-2xl" style="background:rgba(64,145,108,.07);border:1px solid rgba(64,145,108,.25);">
+          <span class="block stat-value font-black leading-none mb-1 tabular-nums" style="color:#40916C;">72%</span>
+          <span class="block text-lg font-semibold mb-1" style="color:#f0f0f2;">klagen: Infos gehen im Chat unter</span>
+          <span class="block text-xs" style="color:#7a7a88;">der Hauptgrund für Planungschaos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 section-dark" id="warum" style="background:#050508;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-14">
+        <h2 class="reveal text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-5" style="color:#f0f0f2;">Warum TreffPunkt</h2>
+        <p class="reveal text-lg max-w-[650px] mx-auto leading-relaxed" style="color:#9999a1;">Fünf klare Vorteile für Gruppen, die sich ohne Chaos treffen wollen.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Kein Account für Teilnehmer</h3>
+          <p style="color:#9a9aaa;">Einladen per Link – Teilnehmer klicken, antworten und sind dabei. Kein Download, keine Registrierung.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Alles an einem Ort</h3>
+          <p style="color:#9a9aaa;">Event, Termin, Ort, Aufgaben und Budget auf einer zentralen Übersichtsseite. Keine 200 WhatsApp-Nachrichten mehr.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Klare Aufgabenverteilung</h3>
+          <p style="color:#9a9aaa;">Wer bringt was? Wer bucht wo? Verbindliche Aufgaben mit Status und Deadline statt loser Versprechen im Chat.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl card-hover" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);">
+          <h3 class="text-xl font-bold mb-3" style="color:#f0f0f2;">Transparente Budgetplanung</h3>
+          <p style="color:#9a9aaa;">Wer schuldet wem was? Automatische Pro-Kopf-Berechnung und klare Kostenübersicht für alle Teilnehmer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funktionen" class="py-24 section-alt">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-14">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4">Kernfunktionen, die euch entlasten</h2>
+        <p class="reveal text-lg max-w-[680px] mx-auto" style="color:var(--color-muted);">Alle wichtigen Funktionen für entspannte Gruppenorganisation in einer klaren, alltagstauglichen Oberfläche.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Event erstellen</h3>
+          <p style="color:var(--color-muted);">Titel, Datum (fest oder offen), Ort, Beschreibung und ein teilbarer Link – in wenigen Minuten startklar.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Terminabstimmung</h3>
+          <p style="color:var(--color-muted);">Mehrere Terminvorschläge, Voting mit Deadline und automatischer Entscheidung bei Ablauf.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Aufgaben &amp; Rollen</h3>
+          <p style="color:var(--color-muted);">Organizer, Helfer, Teilnehmer. Aufgaben mit Verantwortlichem, Deadline und Status-Tracking.</p>
+        </article>
+        <article class="reveal p-7 rounded-2xl bg-white border card-hover accent-hover">
+          <h3 class="text-xl font-bold mb-3">Budget &amp; Kostenaufteilung</h3>
+          <p style="color:var(--color-muted);">Gesamtbudget, Pro-Kopf-Anteil, Wer-schuldet-wem-Übersicht für transparente Abrechnung.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" id="process" style="background:#090a0e;">
+    <div class="max-w-[1100px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-10">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4" style="color:#f0f0f2;">Der Planungsfluss von Idee bis Treffen</h2>
+        <p class="reveal text-lg max-w-[760px] mx-auto" style="color:#a2a2ab;">TreffPunkt macht aus dem WhatsApp-Chaos einen klaren, strukturierten Ablauf – von der ersten Idee bis zum entspannten Treffen.</p>
+      </div>
+      <div class="reveal process-shell" id="processFlow">
+        <div class="process-track">
+          <div class="process-track__bar" id="processFlowBar"></div>
+          <div class="process-track__dot" id="processFlowDot"></div>
+        </div>
+        <div class="process-grid">
+          <article class="process-step process-step--active" tabindex="0">
+            <div class="process-step__index">01</div>
+            <h3 class="process-step__title">Event anlegen</h3>
+            <p class="process-step__text">Neues Event erstellen oder ein bestehendes fortsetzen. Kein Login für Teilnehmer.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Ihr startet ohne Hürde und könnt sofort mit euren echten Planungsdaten loslegen.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">02</div>
+            <h3 class="process-step__title">Abstimmen &amp; planen</h3>
+            <p class="process-step__text">Termin, Ort und Aufgaben festlegen. Budget aufteilen. Alle Infos auf einen Blick.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Das Tool zeigt früh, welche Entscheidungen ausstehen und wer noch nicht geantwortet hat.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">03</div>
+            <h3 class="process-step__title">Erinnerungen &amp; Status</h3>
+            <p class="process-step__text">Automatische Reminder, Teilnehmerstatus, Aufgaben-Tracking.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Mit klarem Status entsteht Verbindlichkeit statt unverbindlicher Bauchentscheidungen im Chat.</div>
+          </article>
+          <article class="process-step" tabindex="0">
+            <div class="process-step__index">04</div>
+            <h3 class="process-step__title">Treffen &amp; genießen</h3>
+            <p class="process-step__text">Event durchführen, Kosten abrechnen, Event archivieren.</p>
+            <p class="process-step__hint">Zum Aufklappen klicken</p>
+            <div class="process-step__more">Ergebnis: Ein entspanntes Treffen, bei dem alle wissen, was wann wo passiert.</div>
+          </article>
+        </div>
+        <p class="process-target"><strong>Ziel:</strong> Weniger Organisationsstress, mehr Vorfreude und ein klarer Planungsstand für alle Beteiligten.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" style="background:#0f1117;" id="ablauf">
+    <div class="max-w-[1000px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-12">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4" style="color:#f0f0f2;">So funktioniert es in 3 Schritten</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(64,145,108,.08);border:1px solid rgba(64,145,108,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#52A280;">Schritt 1</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Event anlegen</h3>
+          <p style="color:#9a9aaa;">Eventdetails und Eckdaten festlegen und per Link einladen.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(64,145,108,.08);border:1px solid rgba(64,145,108,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#52A280;">Schritt 2</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Gemeinsam abstimmen</h3>
+          <p style="color:#9a9aaa;">Termin abstimmen, Ort wählen und Aufgaben fair verteilen.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl" style="background:rgba(64,145,108,.08);border:1px solid rgba(64,145,108,.25);">
+          <span class="text-sm font-bold uppercase tracking-wider" style="color:#52A280;">Schritt 3</span>
+          <h3 class="text-xl font-bold mt-2 mb-2" style="color:#f0f0f2;">Entspannt treffen</h3>
+          <p style="color:#9a9aaa;">Automatische Erinnerungen, Kostenüberblick und ein klarer Status für alle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24" id="faq">
+    <div class="max-w-[900px] mx-auto px-5 md:px-10">
+      <div class="text-center mb-10">
+        <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mb-4">Häufige Fragen</h2>
+      </div>
+      <div id="faqList" class="rounded-2xl bg-white border overflow-hidden">
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Brauchen Teilnehmer einen Account?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Nein. Teilnehmer können per Link teilnehmen, ohne ein Konto zu erstellen.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Wie lade ich Leute ein?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Per direktem Link, WhatsApp-Share oder E-Mail – ganz ohne App-Download.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Kann ich Kosten aufteilen?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Ja. TreffPunkt berechnet automatisch den Anteil pro Person und zeigt, wer wem wie viel schuldet.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question w-full text-left px-6 py-5 flex items-center justify-between">
+            <span class="font-semibold">Ist TreffPunkt kostenlos?</span>
+            <span class="faq-question__icon relative w-5 h-5"></span>
+          </button>
+          <div class="faq-answer px-6 pb-5" style="color:var(--color-muted);">Ja. Die Kernfunktionen sind kostenlos und DSGVO-konform nutzbar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 section-dark" id="final-cta" style="background:#050508;">
+    <div class="max-w-[900px] mx-auto px-5 md:px-10 text-center">
+      <h2 class="reveal text-3xl md:text-5xl font-black leading-[1.1] mb-5" style="color:#f0f0f2;">Startet jetzt euer nächstes Treffen – strukturiert und stressfrei.</h2>
+      <p class="reveal text-lg max-w-[620px] mx-auto mb-9" style="color:#9a9aaa;">Kostenlos, direkt nutzbar und auf das Wesentliche reduziert.</p>
+      <div class="reveal flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://treffpunkt.vercel.app/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;background:#40916C;color:#fff;font-weight:700;border-radius:12px;text-decoration:none;">Jetzt kostenlos starten</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#050508;color:#8e8e93;padding:32px 20px 40px;text-align:center;border-top:1px solid rgba(255,255,255,.08);">
+    <div class="flex items-center justify-center gap-2 mb-2">
+      <img src="app-icon-light.svg" alt="TreffPunkt" style="width:18px;height:18px;opacity:.85;">
+      <span style="font-weight:700;color:#f0f0f2;">TreffPunkt</span>
+    </div>
+    <p style="font-size:.9rem;">Mini-Event-Manager für private Gruppenorganisation.</p>
+    <div style="margin-top:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.85rem;">
+      <a href="https://treffpunkt.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:#80C5A1;text-decoration:none;">App öffnen</a>
+      <a href="impressum.html" style="color:#80C5A1;text-decoration:none;">Impressum</a>
+      <a href="agb.html" style="color:#80C5A1;text-decoration:none;">AGB</a>
+      <a href="datenschutz.html" style="color:#80C5A1;text-decoration:none;">Datenschutz</a>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Nach oben">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Hinweis">
+    <div class="cookie-banner__inner">
+      <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:.45rem;">Hinweis zu lokalem Speicher</h3>
+      <p style="font-size:.92rem;line-height:1.6;color:#4d4d55;">TreffPunkt nutzt lokalen Browser-Speicher und Cookies für technisch notwendige Funktionen. Kein Werbe-Tracker.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap;">
+        <button class="cookie-banner__btn cookie-banner__btn--reject" data-cookie-action="reject">Schließen</button>
+        <button class="cookie-banner__btn cookie-banner__btn--accept" data-cookie-action="accept">Verstanden</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
